@@ -5,7 +5,10 @@ TabControl
 
 使用方法
 ================
-
+var oTab = document.getElementById("container");<br>
+var aTabBar = oTab.getElementsByTagName("ul")[0].getElementsByTagName("li");<br>
+var aTabPages = oTab.getElementsByTagName("div")[0].getElementsByTagName("div");<br>
+		
 TabControl({
     tabBars: aTabBar,
     tabPages:  aTabPages,
