@@ -59,10 +59,10 @@ TabControl.prototype = {
 
         for(i = 0; i < len; i++) {
             if(i == index) {
-                this.tabBars[i].className += " active";
+                this.addClass(this.tabBars[i], "active");
                 this.tabPages[i].style.display = "block";
             } else {
-                this.tabBars[i].className = this.tabBars[i].className.replace(/\bactive\b/g, '');
+                this.removeClass(this.tabBars[i], "active");
                 this.tabPages[i].style.display = "none";
             }
             //设置当前选中的项
@@ -98,6 +98,25 @@ TabControl.prototype = {
         else {
             element["on" + type] = hanlder;
         }
+    },
+    addClass: function(elem, value) {
+        var cur = elem.className ? (" " + elem.className + " ") : " ";
+
+        if(cur.indexOf(" " + value + " ") < 0) {
+            cur += value + " ";
+        }
+        elem.className = this.trim(cur);
+    },
+    removeClass: function(elem, value) {
+        var cur = elem.className ? (" " + elem.className + " ") : " ";
+
+        if(cur.indexOf(" " + value + " ") >= 0) {
+            cur = cur.replace(" " + value + " ", " ");
+        }
+        elem.className = this.trim(cur);
+    },
+    trim: function(text) {
+        return text.replace(/^\s|\s$/g, "");
     }
 };
 
