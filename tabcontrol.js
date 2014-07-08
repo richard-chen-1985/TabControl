@@ -26,15 +26,16 @@ TabControl.prototype = {
             len = this.tabBars.length,
             parent = this.tabBars[0].parentNode;
 
-        for(i = 0; i < len; i++) {
-            if(this.switchEvent == "hover") {
+        for (i = 0; i < len; i++) {
+            if (this.switchEvent == "hover") {
                 (function(i) {
                     _this.addEvent(_this.tabBars[i], 'mouseover', function() {
                         _this.change(i);
                     });
                 })(i);
 
-            } else if(this.switchEvent == "click") {
+            }
+            else if (this.switchEvent == "click") {
                 (function(i) {
                     _this.addEvent(_this.tabBars[i], 'click', function() {
                         _this.change(i);
@@ -57,11 +58,12 @@ TabControl.prototype = {
 
         this.before && this.before(index);
 
-        for(i = 0; i < len; i++) {
-            if(i == index) {
+        for (i = 0; i < len; i++) {
+            if (i == index) {
                 this.addClass(this.tabBars[i], "active");
                 this.tabPages[i].style.display = "block";
-            } else {
+            }
+            else {
                 this.removeClass(this.tabBars[i], "active");
                 this.tabPages[i].style.display = "none";
             }
@@ -80,11 +82,11 @@ TabControl.prototype = {
             _this.change(i);
         }, this.interval);
     },
-    stop: function() {
+    stop: function () {
         clearInterval(this.timer);
     },
-    extend: function(opt, target) {
-        for(name in opt) {
+    extend: function (opt, target) {
+        for (name in opt) {
             target[name] = opt[name];
         }
     },
@@ -99,28 +101,28 @@ TabControl.prototype = {
             element["on" + type] = hanlder;
         }
     },
-    addClass: function(elem, value) {
+    addClass: function (elem, value) {
         var cur = elem.className ? (" " + elem.className + " ") : " ";
 
-        if(cur.indexOf(" " + value + " ") < 0) {
+        if (cur.indexOf(" " + value + " ") < 0) {
             cur += value + " ";
         }
         elem.className = this.trim(cur);
     },
-    removeClass: function(elem, value) {
+    removeClass: function (elem, value) {
         var cur = elem.className ? (" " + elem.className + " ") : " ";
 
-        if(cur.indexOf(" " + value + " ") >= 0) {
+        if (cur.indexOf(" " + value + " ") >= 0) {
             cur = cur.replace(" " + value + " ", " ");
         }
         elem.className = this.trim(cur);
     },
-    trim: function(text) {
+    trim: function (text) {
         return text.replace(/^\s|\s$/g, "");
     }
 };
 
-TabControl.prototype.init = function(opt) {
+TabControl.prototype.init = function (opt) {
     // tab控制按钮
     this.tabBars = null;
     // tab切换页面
