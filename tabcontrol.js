@@ -13,14 +13,13 @@
  *   after：切换后回调函数
  *   index：当前选中的项，默认为0
  */
-var TabControl = function(opt) {
+var TabControl = function (opt) {
     return new TabControl.prototype.init(opt);
 };
 
 TabControl.prototype = {
     constructor: TabControl,
-
-    bindEvents: function() {
+    bindEvents: function () {
         var _this = this,
             i,
             len = this.tabBars.length,
@@ -28,27 +27,26 @@ TabControl.prototype = {
 
         for (i = 0; i < len; i++) {
             if (this.switchEvent == "hover") {
-                (function(i) {
-                    _this.addEvent(_this.tabBars[i], 'mouseover', function() {
+                (function (i) {
+                    _this.addEvent(_this.tabBars[i], 'mouseover', function () {
                         _this.change(i);
                     });
                 })(i);
 
-            }
-            else if (this.switchEvent == "click") {
-                (function(i) {
-                    _this.addEvent(_this.tabBars[i], 'click', function() {
+            } else if (this.switchEvent == "click") {
+                (function (i) {
+                    _this.addEvent(_this.tabBars[i], 'click', function () {
                         _this.change(i);
                     });
                 })(i);
             }
         }
 
-        _this.addEvent(parent, 'mouseenter', function() {
+        _this.addEvent(parent, 'mouseenter', function () {
             _this.stop();
         });
 
-        _this.addEvent(parent, 'mouseleave', function() {
+        _this.addEvent(parent, 'mouseleave', function () {
             _this.autoPlay && _this.startPlay();
         });
     },
@@ -62,8 +60,7 @@ TabControl.prototype = {
             if (i == index) {
                 this.addClass(this.tabBars[i], "active");
                 this.tabPages[i].style.display = "block";
-            }
-            else {
+            } else {
                 this.removeClass(this.tabBars[i], "active");
                 this.tabPages[i].style.display = "none";
             }
@@ -77,8 +74,8 @@ TabControl.prototype = {
         var len = this.tabBars.length;
         var _this = this;
 
-        this.timer = setInterval(function() {
-            var i = _this.index  < len - 1 ? _this.index + 1 : 0 
+        this.timer = setInterval(function () {
+            var i = _this.index < len - 1 ? _this.index + 1 : 0
             _this.change(i);
         }, this.interval);
     },
@@ -93,11 +90,9 @@ TabControl.prototype = {
     addEvent: function (element, type, handler) {
         if (element.addEventListener) {
             element.addEventListener(type, handler, false);
-        }
-        else if (element.attachEvent) {
+        } else if (element.attachEvent) {
             element.attachEvent("on" + type, handler);
-        }
-        else {
+        } else {
             element["on" + type] = hanlder;
         }
     },
@@ -145,7 +140,7 @@ TabControl.prototype.init = function (opt) {
     this.extend(opt, this);
 
     this.bindEvents();
-    
+
     this.change(this.index);
 
     this.autoPlay && this.startPlay();
