@@ -26,20 +26,12 @@ TabControl.prototype = {
             parent = this.tabBars[0].parentNode;
 
         for (i = 0; i < len; i++) {
-            if (this.switchEvent == "hover") {
-                (function (i) {
-                    _this.addEvent(_this.tabBars[i], 'mouseover', function () {
-                        _this.change(i);
-                    });
-                })(i);
-
-            } else if (this.switchEvent == "click") {
-                (function (i) {
-                    _this.addEvent(_this.tabBars[i], 'click', function () {
-                        _this.change(i);
-                    });
-                })(i);
-            }
+            (function(i) {
+                var ev = _this.switchEvent == "hover" ? "mouseover" : "click";
+                _this.addEvent(_this.tabBars[i], ev, function() {
+                    _this.change(i);
+                });
+            })(i);
         }
 
         _this.addEvent(parent, 'mouseenter', function () {
@@ -127,7 +119,7 @@ TabControl.prototype.init = function (opt) {
     // 自动切换时间间隔(ms)，默认3000
     this.interval = 3000;
     // 切换触发事件[ hover | click ]
-    this.switchEvent = 'hover';
+    this.switchEvent = "hover";
     // 切换前回调函数
     this.before = null;
     // 切换后回调函数
